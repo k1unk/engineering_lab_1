@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("F to C (print 'F') or C to F (print 'C') ?");
-        String mode = scanner.next();
+        String mode = scanner.nextLine();
         if (mode.equals("C") || mode.equals("c")) {
             cToF(scanner);
         } else if (mode.equals("F") || mode.equals("f")) {
@@ -26,7 +26,7 @@ public class Main {
         long temperature;
         while (true) {
             System.out.println("Print value:");
-            String value = scanner.next();
+            String value = scanner.nextLine();
             try {
                 temperature = Long.parseLong(value);
                 break;

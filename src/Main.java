@@ -15,11 +15,11 @@ public class Main {
     }
 
     static void cToF(Scanner scanner) {
-        System.out.println(getTemperature(scanner) * 9/5 + 32);
+        System.out.println(getTemperature(scanner) * 9 / 5.0 + 32);
     }
 
     static void fToC(Scanner scanner) {
-        System.out.println((getTemperature(scanner) - 32) * 5 / 9);
+        System.out.println((getTemperature(scanner) - 32) * 5 / 9.0);
     }
 
     static long getTemperature(Scanner scanner) {

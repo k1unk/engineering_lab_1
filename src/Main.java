@@ -23,9 +23,18 @@ public class Main {
     }
 
     static long getTemperature(Scanner scanner) {
-        System.out.println("Print value:");
-        String value = scanner.next();
-        return Long.parseLong(value);
+        long temperature;
+        while (true) {
+            System.out.println("Print value:");
+            String value = scanner.next();
+            try {
+                temperature = Long.parseLong(value);
+                break;
+            } catch (Exception e) {
+                System.out.println("Wrong input value");
+            }
+        }
+        return temperature;
     }
 
 }

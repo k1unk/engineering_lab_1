@@ -6,11 +6,12 @@
 
 ## Запуск напрямую
 
-java -jar lab_1.jar
+java -jar lab_1-1.0-SNAPSHOT-jar-with-dependencies.jar
+
 
 ## Docker
 
 Собрать образ:
-    docker build -t lab1 .
+    docker build -t lab.jar .
 Запустить контейнер: 
-    docker run -i lab1
+    docker run -i lab.jar

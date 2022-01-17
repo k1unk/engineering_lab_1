@@ -1,3 +1,5 @@
+[![CI](https://github.com/k1unk/engineering_lab_1/actions/workflows/main.yml/badge.svg)](https://github.com/k1unk/engineering_lab_1/actions/workflows/main.yml)
+
 ## Описание
 
 С помощью данного сервиса можно конвертировать:

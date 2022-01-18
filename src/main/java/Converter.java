@@ -8,7 +8,7 @@ public class Converter {
     private static PrintStream printStream;
 
     public Converter(InputStream inputStream, PrintStream printStream) {
-        scanner = new Scanner(inputStream);git branch
+        scanner = new Scanner(inputStream);
         Converter.printStream = printStream;
     }
 

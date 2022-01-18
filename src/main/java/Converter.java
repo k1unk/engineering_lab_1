@@ -4,28 +4,12 @@ import java.util.Scanner;
 
 public class Converter {
 
-    private final Scanner scanner;
-    private final PrintStream printStream;
+    private static Scanner scanner;
+    private static PrintStream printStream;
 
     public Converter(InputStream inputStream, PrintStream printStream) {
-        this.scanner = new Scanner(inputStream);
-        this.printStream = printStream;
-    }
-
-    public void start() {
-        while (true) {
-            printStream.println("F to C (print 'F') or C to F (print 'C') ?");
-            String mode = scanner.nextLine();
-            if (mode.equals("C") || mode.equals("c")) {
-                cToF(scanner, printStream);
-                break;
-            } else if (mode.equals("F") || mode.equals("f")) {
-                fToC(scanner, printStream);
-                break;
-            } else {
-                printStream.println("error. No such mode (C or F)");
-            }
-        }
+        scanner = new Scanner(inputStream);
+        Converter.printStream = printStream;
     }
 
     public static void main(String[] args) {
@@ -33,21 +17,56 @@ public class Converter {
         userInputExample.start();
     }
 
-    static void cToF(Scanner scanner, PrintStream printStream) {
-        double result = Math.round((getTemperature(scanner, printStream) * 9.0 / 5.0 + 32.0) * 10.0) / 10.0;
-        printStream.println("result: " + result);
+
+    public void start() {
+        double result;
+        while (true) {
+            printStream.println("F to C (print 'F') or C to F (print 'C') ?");
+            String mode = scanner.nextLine();
+            if (!checkModeCorrectness(mode)) printStream.println("error. No such mode (C or F)");
+            if (mode.equals("C") || mode.equals("c")) {
+                result = convertCelsiusToFahrenheit();
+                break;
+            } else if (mode.equals("F") || mode.equals("f")) {
+                result = convertFahrenheitToCelsius();
+                break;
+            }
+        }
+        printStream.println("result: " + (result * 10.0) / 10.0);
+
     }
 
-    static void fToC(Scanner scanner, PrintStream printStream) {
-        double result = Math.round((getTemperature(scanner, printStream) - 32.0) * 5.0 / 9.0 * 10.0) / 10.0;
-        printStream.println("result: " + result);
+    public static boolean checkModeCorrectness(String mode) {
+        return mode.equals("C") || mode.equals("c") || mode.equals("F") || mode.equals("f");
     }
 
-    static double getTemperature(Scanner scanner, PrintStream printStream) {
+    public double convertCelsiusToFahrenheit() {
+        double temperature = getTemperature(scanner, printStream);
+        return countTemperatureCelsiusToFahrenheit(temperature);
+    }
+
+    public static double countTemperatureCelsiusToFahrenheit(double temperature) {
+        return temperature * 9.0 / 5.0 + 32.0;
+    }
+
+    public double convertFahrenheitToCelsius() {
+        double temperature = getTemperature(scanner, printStream);
+        return countTemperatureFahrenheitToCelsius(temperature);
+    }
+
+    public static double countTemperatureFahrenheitToCelsius(double temperature) {
+        return (temperature - 32.0) * 5.0 / 9.0;
+    }
+
+    public double getTemperature(Scanner scanner, PrintStream printStream) {
         double temperature;
         while (true) {
             printStream.println("Print value:");
             String value = scanner.nextLine();
+            if (!checkValueCorrectness(value)) {
+                printStream.println("Wrong input value");
+                continue;
+            }
             try {
                 if (value.contains(".")) {
                     temperature = Double.parseDouble(value);
@@ -60,5 +79,9 @@ public class Converter {
             }
         }
         return temperature;
+    }
+
+    public static boolean checkValueCorrectness(String value) {
+        return value.matches("-?\\d+(\\.\\d+)?");
     }
 }
